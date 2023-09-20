@@ -7,30 +7,30 @@ class Pair {
 }
 
 class QEquation {
-    private int a, b, c;
-    public int a() {return a;}
-    public int b() {return b;}
-    public int c() {return c;}
+    private double a, b, c;
+    public double a() {return a;}
+    public double b() {return b;}
+    public double c() {return c;}
     
-    public QEquation (int a, int b, int c) {
+    public QEquation (double a, double b, double c) {
         this.a = a;
         this.b = b;
         this.c = c;
     }
     
     public QEquation (Scanner s) {
-        this.a = s.nextInt();
-        this.b = s.nextInt();
-        this.c = s.nextInt();
+        this.a = s.nextDouble();
+        this.b = s.nextDouble();
+        this.c = s.nextDouble();
     }
     
-    private int d() {
+    private double d() {
         return b*b-4*a*c;
     }
     
     public Pair get_ans() {
         Pair p = new Pair();
-        int discr = d();
+        double discr = d();
         
         if (a == 0) {
             if (b == 0) p.msg = "no";
@@ -67,6 +67,7 @@ class Solution {
         process(new QEquation(0,3,-4));
         process(new QEquation(0,0,-4));
         process(new QEquation(5,0,0));
+        process(new QEquation(2,0.5,-5));
         
         Scanner scan = new Scanner(System.in);
         while (scan.hasNextLine()) {
@@ -78,17 +79,17 @@ class Solution {
     
     private static void process(QEquation qe) {
         System.out.printf("Solving equation ");
-        if (qe.a() != 0) System.out.printf("%dx^2", qe.a());
-        if (qe.b() > 0) System.out.printf("+%dx", qe.b());
-        if (qe.b() < 0) System.out.printf("%dx", qe.b());
-        if (qe.c() > 0) System.out.printf("+%d", qe.c());
-        if (qe.c() < 0) System.out.printf("%d", qe.c());
+        if (qe.a() != 0) System.out.printf("%.2fx^2", qe.a());
+        if (qe.b() > 0) System.out.printf("+%.2fx", qe.b());
+        if (qe.b() < 0) System.out.printf("%.2fx", qe.b());
+        if (qe.c() > 0) System.out.printf("+%.2f", qe.c());
+        if (qe.c() < 0) System.out.printf("%.2f", qe.c());
         System.out.printf("=0 ...\n");
         
         Pair ans = qe.get_ans();
         if (ans.msg == "no") System.out.println("There is no answer (((");
-        if (ans.msg == "single") System.out.printf("Answer: x=%f\n", ans.x);
-        if (ans.msg == "double") System.out.printf("Answer: x1=%f, x2=%f\n", ans.x, ans.y);
+        if (ans.msg == "single") System.out.printf("Answer: x=%.4f\n", ans.x);
+        if (ans.msg == "double") System.out.printf("Answer: x1=%.4f, x2=%.4f\n", ans.x, ans.y);
         
         System.out.println();
     }
